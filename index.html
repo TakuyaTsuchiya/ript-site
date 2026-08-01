@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社RIPT｜AI × 経営</title>
+<meta name="description" content="現状を知る。ゴールを描く。ギャップを埋める。株式会社RIPTは、AIと経営の両方を扱うアドバイザーとして、御社の業務に「変化」を起こします。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #faf7f2;
+    --paper-deep: #f2ede4;
+    --ink: #1c1b18;
+    --ink-soft: #55524a;
+    --line: #dcd5c8;
+    --shu: #d8432c;            /* 朱 */
+    --shu-deep: #b23016;
+    --night: #16181c;
+    --night-line: #2c2f36;
+    --night-text: #e8e4da;
+    --mincho: "Zen Old Mincho", serif;
+    --gothic: "Zen Kaku Gothic New", sans-serif;
+    --mono: "IBM Plex Mono", monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--gothic);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.9;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--shu); color: #fff; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- header ---------- */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-in {
+    max-width: 1080px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    font-family: var(--mono); font-weight: 600; font-size: 20px;
+    letter-spacing: 0.14em; color: var(--ink); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo::before {
+    content: ""; width: 11px; height: 11px; background: var(--shu);
+    display: inline-block;
+  }
+  nav { display: flex; gap: 34px; align-items: center; }
+  nav a {
+    color: var(--ink-soft); text-decoration: none; font-size: 13px;
+    letter-spacing: 0.12em; transition: color .25s;
+  }
+  nav a:hover { color: var(--shu); }
+  nav a.cta {
+    color: #fff; background: var(--ink); padding: 9px 22px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em;
+    transition: background .25s;
+  }
+  nav a.cta:hover { background: var(--shu); }
+  .menu-note { display: none; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex; align-items: center;
+    background-image: repeating-linear-gradient(
+      to bottom, transparent 0 42px, var(--line) 42px 43px);
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "R";
+    position: absolute; right: -4%; bottom: -22%;
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(340px, 46vw, 640px);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--line);
+    line-height: 1; pointer-events: none; user-select: none;
+  }
+  .hero-in { position: relative; z-index: 2; width: 100%; padding: 140px 0 90px; }
+  .hero-label {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.3em;
+    color: var(--shu); margin-bottom: 34px;
+  }
+  h1 {
+    font-family: var(--mincho); font-weight: 700;
+    font-size: clamp(38px, 6.4vw, 74px);
+    line-height: 1.5; letter-spacing: 0.06em;
+  }
+  h1 .shu { color: var(--shu); }
+  .hero-sub {
+    margin-top: 38px; max-width: 660px; color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .hero-tate {
+    position: absolute; top: 120px; right: 34px; z-index: 2;
+    writing-mode: vertical-rl; font-family: var(--mincho);
+    font-size: 13px; letter-spacing: 0.42em; color: var(--ink-soft);
+    border-right: 1px solid var(--ink); padding-right: 14px;
+    height: 300px;
+  }
+  .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s ease, transform .9s ease; }
+  .js .reveal.on { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+  }
+  .d1 { transition-delay: .08s } .d2 { transition-delay: .2s } .d3 { transition-delay: .34s }
+
+  /* ---------- section base ---------- */
+  section { padding: 110px 0; }
+  .sec-head { display: flex; align-items: baseline; gap: 22px; margin-bottom: 64px; }
+  .sec-no { font-family: var(--mono); font-size: 13px; color: var(--shu); letter-spacing: 0.2em; }
+  .sec-title { font-family: var(--mincho); font-size: clamp(26px, 3.4vw, 38px); font-weight: 600; letter-spacing: 0.1em; }
+  .sec-en { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); letter-spacing: 0.28em; margin-left: auto; }
+
+  /* ---------- services ---------- */
+  .services { border-top: 1px solid var(--line); }
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); }
+  .svc {
+    padding: 44px 34px 50px; border-right: 1px solid var(--line);
+    background: var(--paper); transition: background .35s;
+    position: relative;
+  }
+  .svc:last-child { border-right: none; }
+  .svc:hover { background: #fff; }
+  .svc::after {
+    content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 0;
+    background: var(--shu); transition: width .45s ease;
+  }
+  .svc:hover::after { width: 100%; }
+  .svc-no { font-family: var(--mono); font-size: 12px; color: var(--shu); letter-spacing: 0.2em; }
+  .svc h3 { font-family: var(--mincho); font-size: 21px; font-weight: 600; margin: 18px 0 16px; letter-spacing: 0.08em; }
+  .svc p { color: var(--ink-soft); font-size: 13.5px; }
+  .svc ul { margin-top: 18px; list-style: none; }
+  .svc li {
+    font-size: 12.5px; color: var(--ink-soft); padding: 7px 0 7px 16px;
+    border-bottom: 1px dashed var(--line); position: relative;
+  }
+  .svc li::before { content: "—"; position: absolute; left: 0; color: var(--shu); }
+
+  /* ---------- results (dark) ---------- */
+  .results { background: var(--night); color: var(--night-text); }
+  .results .sec-title { color: #fff; }
+  .results .sec-en { color: #8b8fa0; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--night-line); }
+  .stat { padding: 46px 36px; border-right: 1px solid var(--night-line); }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(44px, 5.4vw, 64px); line-height: 1.1; color: #fff;
+  }
+  .stat-num .unit { font-size: 0.4em; color: var(--shu); margin-left: 6px; }
+  .stat-label { margin-top: 14px; font-size: 13px; color: #9a9eab; }
+  .case {
+    margin-top: 26px; border: 1px solid var(--night-line); padding: 42px 40px;
+    display: grid; grid-template-columns: 180px 1fr; gap: 34px; align-items: start;
+  }
+  .case-tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em;
+    color: var(--shu); border: 1px solid var(--shu);
+    padding: 6px 12px; display: inline-block; white-space: nowrap;
+  }
+  .case h3 { font-family: var(--mincho); font-size: 22px; font-weight: 600; color: #fff; letter-spacing: 0.06em; margin-bottom: 14px; }
+  .case p { color: #b7bac4; font-size: 13.5px; }
+
+  /* ---------- profile ---------- */
+  .profile-grid { display: grid; grid-template-columns: 300px 1fr; gap: 70px; align-items: start; }
+  .face {
+    aspect-ratio: 3/3.6; background: var(--paper-deep); border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); color: var(--ink-soft); font-size: 12px;
+    letter-spacing: 0.2em;
+  }
+  .profile-name-en { font-family: var(--mono); font-size: 12px; color: var(--shu); letter-spacing: 0.26em; }
+  .profile-name { font-family: var(--mincho); font-size: 32px; font-weight: 600; margin: 10px 0 6px; letter-spacing: 0.12em; }
+  .profile-role { font-size: 13px; color: var(--ink-soft); margin-bottom: 28px; }
+  .profile-body p { color: var(--ink-soft); font-size: 14px; margin-bottom: 16px; max-width: 560px; }
+
+  /* ---------- company ---------- */
+  .company { background: var(--paper-deep); border-top: 1px solid var(--line); }
+  .co-table { width: 100%; border-collapse: collapse; max-width: 720px; }
+  .co-table th, .co-table td {
+    text-align: left; padding: 20px 8px; border-bottom: 1px solid var(--line);
+    font-weight: 400; font-size: 14px; vertical-align: top;
+  }
+  .co-table th { width: 180px; color: var(--ink-soft); font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; }
+
+  /* ---------- contact ---------- */
+  .contact { text-align: center; padding: 130px 0; }
+  .contact .big {
+    font-family: var(--mincho); font-size: clamp(28px, 4.4vw, 46px);
+    font-weight: 600; letter-spacing: 0.1em; line-height: 1.7;
+  }
+  .contact p.lead { color: var(--ink-soft); margin: 26px auto 46px; max-width: 480px; font-size: 14px; }
+  .btn {
+    display: inline-block; text-decoration: none;
+    font-family: var(--mono); font-size: 14px; letter-spacing: 0.18em;
+    color: #fff; background: var(--ink); padding: 20px 64px;
+    position: relative; overflow: hidden; transition: color .3s;
+  }
+  .btn span { position: relative; z-index: 2; }
+  .btn::before {
+    content: ""; position: absolute; inset: 0; background: var(--shu);
+    transform: translateY(101%); transition: transform .35s ease;
+  }
+  .btn:hover::before { transform: none; }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 34px 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-soft);
+    letter-spacing: 0.14em;
+  }
+  footer .wrap { display: flex; justify-content: space-between; width: 100%; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px) {
+    nav a:not(.cta) { display: none; }
+    .hero-tate { display: none; }
+    .svc-grid, .stat-grid { grid-template-columns: 1fr; }
+    .svc, .stat { border-right: none; border-bottom: 1px solid var(--line); }
+    .results .stat { border-bottom: 1px solid var(--night-line); }
+    .svc:last-child, .stat:last-child { border-bottom: none; }
+    .case { grid-template-columns: 1fr; gap: 20px; }
+    .profile-grid { grid-template-columns: 1fr; gap: 40px; }
+    .face { max-width: 260px; }
+    section { padding: 80px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="logo" href="#top">RIPT</a>
+    <nav>
+      <a href="#services">事業内容</a>
+      <a href="#results">実績</a>
+      <a href="#profile">代表</a>
+      <a href="#company">会社概要</a>
+      <!-- TODO: 送信先メールアドレスを差し替え -->
+      <a class="cta" href="mailto:contact@example.com">CONTACT</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero" id="top">
+  <div class="wrap hero-in">
+    <p class="hero-label reveal d1">RIPT Inc. — Management Advisory</p>
+    <h1 class="reveal d2">AI <span class="shu">×</span> 経営</h1>
+    <p class="hero-sub reveal d3">
+      現状を知る。ゴールを描く。ギャップを埋める。<br>
+      私たちが届けるのは、御社の業務に起きる「変化」です。<br>
+      AIも、システムも、そのための道具にすぎません。
+    </p>
+  </div>
+  <div class="hero-tate">現状から、理想へ。</div>
+</div>
+
+<!-- ================= SERVICES ================= -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-no">01</span>
+      <h2 class="sec-title">事業内容</h2>
+      <span class="sec-en">SERVICES</span>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal d1">
+        <span class="svc-no">S-01</span>
+        <h3>経営アドバイザリー</h3>
+        <p>数字とITの両面から、経営の意思決定に伴走します。DX戦略の立案だけでなく、実行まで一気通貫で支援します。</p>
+        <ul>
+          <li>業務効率化・DX戦略の立案と実行</li>
+          <li>ITツール選定・導入の技術的判断</li>
+          <li>外部システム会社の提案評価</li>
+        </ul>
+      </div>
+      <div class="svc reveal d2">
+        <span class="svc-no">S-02</span>
+        <h3>法人向けAI・経理研修</h3>
+        <p>ChatGPT・Claudeなどの生成AIを、現場の定型業務で使いこなすための実践研修。経理・バックオフィス業務に特化したカリキュラムを提供します。</p>
+        <ul>
+          <li>生成AI活用の社内研修・講座設計</li>
+          <li>経理・事務業務のAI活用実習</li>
+          <li>導入後の定着伴走支援</li>
+        </ul>
+      </div>
+      <div class="svc reveal d3">
+        <span class="svc-no">S-03</span>
+        <h3>業務システム・AI開発</h3>
+        <p>毎日の手作業を、ボタンひとつに。AIを活用した高速開発で、業務に合わせたシステムを小さく速く作り、育てます。</p>
+        <ul>
+          <li>定型業務の自動化システム開発</li>
+          <li>データ変換・帳票作成の自動化</li>
+          <li>保守運用・継続的な機能改善</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESULTS (dark) ================= -->
+<section class="results" id="results">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-no">02</span>
+      <h2 class="sec-title">実績</h2>
+      <span class="sec-en">TRACK RECORD</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat reveal d1">
+        <div class="stat-num" data-count="40">0<span class="unit">種+</span></div>
+        <div class="stat-label">自動化した定型業務の処理数</div>
+      </div>
+      <div class="stat reveal d2">
+        <div class="stat-num" data-count="14">0<span class="unit">件</span></div>
+        <div class="stat-label">直近2か月で納品した新機能</div>
+      </div>
+      <div class="stat reveal d3">
+        <div class="stat-num" data-count="100">0<span class="unit">%</span></div>
+        <div class="stat-label">代表による直接担当率</div>
+      </div>
+    </div>
+    <div class="case reveal">
+      <span class="case-tag">CASE STUDY</span>
+      <div>
+        <h3>法律事務所の債権回収業務を、まるごと自動化</h3>
+        <p>
+          複数システムに散らばるデータの突合・変換・リスト作成を、Webアプリケーションとして一元化。
+          担当者が手作業で行っていたリスト作成業務をボタンひとつに置き換え、
+          転記ミスによる事故リスクを排除しました。現在も毎月新機能を追加しながら、保守運用を継続中です。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROFILE ================= -->
+<section id="profile">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title">代表</h2>
+      <span class="sec-en">REPRESENTATIVE</span>
+    </div>
+    <div class="profile-grid">
+      <!-- TODO: 写真に差し替え -->
+      <div class="face reveal d1">PHOTO</div>
+      <div class="reveal d2">
+        <p class="profile-name-en">TAKUYA TSUCHIYA</p>
+        <h3 class="profile-name">土屋 拓也</h3>
+        <p class="profile-role">株式会社RIPT 代表取締役</p>
+        <div class="profile-body">
+          <p>
+            経営と技術の両方を話せることを強みに、法律事務所・中小企業の業務変革を支援。
+            生成AIを本格活用した開発体制により、通常数週間かかる業務システム開発を数日で納品する。
+          </p>
+          <p>
+            AIスクールでの講師・カリキュラム開発の経験を活かし、
+            「現場が本当に使えるようになる」研修設計を得意とする。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPANY ================= -->
+<section class="company" id="company">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-no">04</span>
+      <h2 class="sec-title">会社概要</h2>
+      <span class="sec-en">COMPANY</span>
+    </div>
+    <table class="co-table reveal">
+      <tr><th>社名</th><td>株式会社RIPT</td></tr>
+      <tr><th>代表者</th><td>代表取締役　土屋 拓也</td></tr>
+      <tr><th>所在地</th><td>〒105-0013<br>東京都港区浜松町2丁目2番15号 浜松町ダイヤビル2階</td></tr>
+      <tr><th>事業内容</th><td>経営アドバイザリー／法人向けAI・経理研修／業務システム・AI開発</td></tr>
+      <tr><th>適格請求書発行事業者<br>登録番号</th><td>T1010701034732</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="big reveal d1">まずは、業務の困りごとを<br>そのまま聞かせてください。</p>
+    <p class="lead reveal d2">
+      「何をAI化できるのか分からない」段階からのご相談を歓迎します。
+      ご相談・お見積りは無料です。
+    </p>
+    <!-- TODO: 送信先メールアドレスを差し替え -->
+    <a class="btn reveal d3" href="mailto:contact@example.com"><span>CONTACT →</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© RIPT Inc.</span>
+    <span>TOKYO / HAMAMATSUCHO</span>
+  </div>
+</footer>
+
+<script>
+  document.body.classList.add("js");
+  // スクロール表示
+  const io = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } });
+  }, { threshold: 0.18 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // 数字カウントアップ
+  const cio = new IntersectionObserver((es) => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, goal = +el.dataset.count, unit = el.querySelector(".unit");
+      const t0 = performance.now(), dur = 1200;
+      (function tick(t) {
+        const p = Math.min((t - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.childNodes[0].textContent = Math.round(goal * eased);
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+      cio.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll(".stat-num").forEach(el => cio.observe(el));
+</script>
+</body>
+</html>
