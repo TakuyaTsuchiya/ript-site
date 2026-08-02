@@ -179,13 +179,7 @@
   .case p { color: #b7bac4; font-size: 13.5px; }
 
   /* ---------- profile ---------- */
-  .profile-grid { display: grid; grid-template-columns: 300px 1fr; gap: 70px; align-items: start; }
-  .face {
-    aspect-ratio: 3/3.6; background: var(--paper-deep); border: 1px solid var(--line);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); color: var(--ink-soft); font-size: 12px;
-    letter-spacing: 0.2em;
-  }
+  .profile-grid { max-width: 720px; }
   .profile-name-en { font-family: var(--mono); font-size: 12px; color: var(--shu); letter-spacing: 0.26em; }
   .profile-name { font-family: var(--mincho); font-size: 32px; font-weight: 600; margin: 10px 0 6px; letter-spacing: 0.12em; }
   .profile-role { font-size: 13px; color: var(--ink-soft); margin-bottom: 28px; }
@@ -237,8 +231,6 @@
     .results .stat { border-bottom: 1px solid var(--night-line); }
     .svc:last-child, .stat:last-child { border-bottom: none; }
     .case { grid-template-columns: 1fr; gap: 20px; }
-    .profile-grid { grid-template-columns: 1fr; gap: 40px; }
-    .face { max-width: 260px; }
     section { padding: 80px 0; }
   }
 </style>
@@ -361,9 +353,7 @@
       <span class="sec-en">REPRESENTATIVE</span>
     </div>
     <div class="profile-grid">
-      <!-- TODO: 写真に差し替え -->
-      <div class="face reveal d1">PHOTO</div>
-      <div class="reveal d2">
+      <div class="reveal d1">
         <p class="profile-name-en">TAKUYA TSUCHIYA</p>
         <h3 class="profile-name">土屋 拓也</h3>
         <p class="profile-role">株式会社RIPT 代表取締役</p>
