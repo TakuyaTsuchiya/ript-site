@@ -4,28 +4,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>株式会社RIPT｜AI × 経営</title>
-<meta name="description" content="現状を知る。ゴールを描く。ギャップを埋める。株式会社RIPTは、AIと経営の両方を扱うアドバイザーとして、御社の業務に「変化」を起こします。">
+<meta name="description" content="経理を回す時間を、売上をつくる時間へ。株式会社RIPTは、経理自動化パック（30万円）をはじめ、AIと業務システムで中小企業・法律事務所の業務を変えます。代表が直接担当。">
+<meta name="theme-color" content="#faf7f2">
+<meta property="og:title" content="株式会社RIPT｜AI × 経営">
+<meta property="og:description" content="経理を回す時間を、売上をつくる時間へ。AIと業務システムで、御社の業務に『変化』を起こします。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ript.work">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #faf7f2;
     --paper-deep: #f2ede4;
+    --paper-card: #fffdf9;
     --ink: #1c1b18;
     --ink-soft: #55524a;
+    --ink-faint: #8b8778;
     --line: #dcd5c8;
+    --line-soft: #e8e2d6;
     --shu: #d8432c;            /* 朱 */
     --shu-deep: #b23016;
+    --shu-wash: #fbeae6;
     --night: #16181c;
     --night-line: #2c2f36;
     --night-text: #e8e4da;
     --mincho: "Zen Old Mincho", serif;
     --gothic: "Zen Kaku Gothic New", sans-serif;
     --mono: "IBM Plex Mono", monospace;
+    --maxw: 1120px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
     font-family: var(--gothic);
     background: var(--paper);
@@ -34,275 +44,474 @@
     font-size: 15px;
     letter-spacing: 0.02em;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
   ::selection { background: var(--shu); color: #fff; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
 
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  /* reveal — only hidden when JS is active; JS-off shows everything */
+  .js .reveal { opacity: 0; transform: translateY(26px); }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .reveal { opacity: 1 !important; transform: none !important; }
+  }
+
+  /* focus visibility + tap targets */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--shu);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+  .skip {
+    position: absolute; left: 12px; top: -48px; z-index: 300;
+    background: var(--ink); color: #fff; padding: 10px 18px;
+    font-family: var(--mono); font-size: 12px; transition: top .2s;
+  }
+  .skip:focus { top: 12px; }
 
   /* ---------- header ---------- */
   header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
-    backdrop-filter: blur(10px);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
   .header-in {
-    max-width: 1080px; margin: 0 auto; padding: 0 24px;
+    max-width: var(--maxw); margin: 0 auto; padding: 0 28px;
     display: flex; align-items: center; justify-content: space-between;
-    height: 64px;
+    height: 66px; gap: 18px;
   }
   .logo {
-    font-family: var(--mono); font-weight: 600; font-size: 20px;
+    font-family: var(--mono); font-weight: 600; font-size: 21px;
     letter-spacing: 0.14em; color: var(--ink); text-decoration: none;
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 11px; flex-shrink: 0;
   }
   .logo::before {
     content: ""; width: 11px; height: 11px; background: var(--shu);
     display: inline-block;
   }
-  nav { display: flex; gap: 34px; align-items: center; }
-  nav a {
+  .nav-main { display: flex; gap: 30px; align-items: center; margin-left: auto; }
+  .nav-main a {
     color: var(--ink-soft); text-decoration: none; font-size: 13px;
-    letter-spacing: 0.12em; transition: color .25s;
+    letter-spacing: 0.1em; transition: color .25s; white-space: nowrap;
+    padding: 6px 2px;
   }
-  nav a:hover { color: var(--shu); }
-  nav a.cta {
-    color: #fff; background: var(--ink); padding: 9px 22px;
-    font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em;
-    transition: background .25s;
+  .nav-main a:hover { color: var(--shu); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  a.cta {
+    color: #fff; background: var(--ink); padding: 11px 22px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+    text-decoration: none; transition: background .25s;
+    display: inline-flex; align-items: center; min-height: 44px;
   }
-  nav a.cta:hover { background: var(--shu); }
-  .menu-note { display: none; }
+  a.cta:hover { background: var(--shu); }
+
+  /* hamburger */
+  .burger {
+    display: none; width: 44px; height: 44px; background: none; border: none;
+    cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 5px;
+  }
+  .burger span { display: block; width: 22px; height: 2px; background: var(--ink); transition: transform .3s, opacity .3s; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* mobile panel */
+  .mobile-nav {
+    display: none;
+    position: fixed; top: 66px; left: 0; right: 0; z-index: 190;
+    background: var(--paper); border-bottom: 1px solid var(--line);
+    padding: 10px 28px 22px;
+  }
+  .mobile-nav.open { display: block; }
+  .mobile-nav a {
+    display: block; text-decoration: none; color: var(--ink);
+    font-family: var(--mincho); font-size: 18px; letter-spacing: 0.08em;
+    padding: 15px 2px; border-bottom: 1px solid var(--line-soft);
+    min-height: 44px;
+  }
+  .mobile-nav a .en { font-family: var(--mono); font-size: 10px; color: var(--ink-faint); letter-spacing: 0.2em; margin-left: 10px; }
+  .mobile-nav a:last-child { border-bottom: none; }
 
   /* ---------- hero ---------- */
   .hero {
-    position: relative;
-    min-height: 92vh;
+    position: relative; min-height: 94vh;
     display: flex; align-items: center;
-    background-image: repeating-linear-gradient(
-      to bottom, transparent 0 42px, var(--line) 42px 43px);
+    padding-top: 66px;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 44px, var(--line-soft) 44px 45px);
     overflow: hidden;
   }
   .hero::after {
-    content: "R";
-    position: absolute; right: -4%; bottom: -22%;
+    content: "R"; position: absolute; right: -5%; bottom: -24%;
     font-family: var(--mono); font-weight: 600;
-    font-size: clamp(340px, 46vw, 640px);
-    color: transparent;
-    -webkit-text-stroke: 1px var(--line);
+    font-size: clamp(320px, 46vw, 660px);
+    color: transparent; -webkit-text-stroke: 1px var(--line);
     line-height: 1; pointer-events: none; user-select: none;
   }
-  .hero-in { position: relative; z-index: 2; width: 100%; padding: 140px 0 90px; }
+  .hero-in { position: relative; z-index: 2; width: 100%; padding: 90px 0 86px; }
   .hero-label {
     font-family: var(--mono); font-size: 12px; letter-spacing: 0.3em;
-    color: var(--shu); margin-bottom: 34px;
+    color: var(--shu); margin-bottom: 30px;
   }
   h1 {
     font-family: var(--mincho); font-weight: 700;
-    font-size: clamp(38px, 6.4vw, 74px);
-    line-height: 1.5; letter-spacing: 0.06em;
+    font-size: clamp(40px, 6.6vw, 78px);
+    line-height: 1.45; letter-spacing: 0.05em;
   }
   h1 .shu { color: var(--shu); }
   .hero-sub {
-    margin-top: 38px; max-width: 660px; color: var(--ink-soft);
-    font-size: 15px;
+    margin-top: 36px; max-width: 640px; color: var(--ink-soft); font-size: 15.5px;
   }
+  .hero-lines {
+    margin-top: 30px; font-family: var(--mincho); font-size: clamp(17px, 2vw, 21px);
+    line-height: 2; color: var(--ink); letter-spacing: 0.04em;
+  }
+  .hero-lines b { color: var(--shu); font-weight: 600; }
+  .hero-ctas { margin-top: 44px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .hero-ctas .mail-plain { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); letter-spacing: 0.06em; text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+  .hero-ctas .mail-plain:hover { color: var(--shu); border-color: var(--shu); }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 12px; min-height: 44px;
+    text-decoration: none; font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em;
+    color: #fff; background: var(--shu); padding: 15px 32px;
+    position: relative; overflow: hidden; transition: background .3s;
+  }
+  .btn-primary span { position: relative; z-index: 2; }
+  .btn-primary::before { content: ""; position: absolute; inset: 0; background: var(--shu-deep); transform: translateY(101%); transition: transform .35s ease; }
+  .btn-primary:hover::before { transform: none; }
+  .btn-primary .price-chip { font-weight: 600; }
+
   .hero-tate {
-    position: absolute; top: 120px; right: 34px; z-index: 2;
+    position: absolute; top: 150px; right: 40px; z-index: 2;
     writing-mode: vertical-rl; font-family: var(--mincho);
     font-size: 13px; letter-spacing: 0.42em; color: var(--ink-soft);
-    border-right: 1px solid var(--ink); padding-right: 14px;
-    height: 300px;
+    border-right: 1px solid var(--ink); padding-right: 14px; height: 280px;
   }
-  .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s ease, transform .9s ease; }
-  .js .reveal.on { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .js .reveal { opacity: 1; transform: none; transition: none; }
-  }
-  .d1 { transition-delay: .08s } .d2 { transition-delay: .2s } .d3 { transition-delay: .34s }
 
   /* ---------- section base ---------- */
-  section { padding: 110px 0; }
-  .sec-head { display: flex; align-items: baseline; gap: 22px; margin-bottom: 64px; }
+  section { padding: 112px 0; }
+  .sec-head { display: flex; align-items: baseline; gap: 22px; margin-bottom: 60px; flex-wrap: wrap; }
   .sec-no { font-family: var(--mono); font-size: 13px; color: var(--shu); letter-spacing: 0.2em; }
-  .sec-title { font-family: var(--mincho); font-size: clamp(26px, 3.4vw, 38px); font-weight: 600; letter-spacing: 0.1em; }
-  .sec-en { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); letter-spacing: 0.28em; margin-left: auto; }
+  .sec-title { font-family: var(--mincho); font-size: clamp(27px, 3.6vw, 40px); font-weight: 600; letter-spacing: 0.08em; }
+  .sec-en { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.26em; margin-left: auto; }
+  .sec-lead { max-width: 640px; margin: -34px 0 56px; color: var(--ink-soft); font-size: 14.5px; }
 
-  /* ---------- services ---------- */
-  .services { border-top: 1px solid var(--line); }
-  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); }
-  .svc {
-    padding: 44px 34px 50px; border-right: 1px solid var(--line);
-    background: var(--paper); transition: background .35s;
-    position: relative;
+  /* ---------- products ---------- */
+  .products { border-top: 1px solid var(--line); }
+  /* featured */
+  .feature {
+    border: 1px solid var(--line); background: var(--paper-card);
+    display: grid; grid-template-columns: 1.55fr 1fr; gap: 0;
+    position: relative; overflow: hidden; margin-bottom: 26px;
   }
-  .svc:last-child { border-right: none; }
-  .svc:hover { background: #fff; }
-  .svc::after {
-    content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 0;
-    background: var(--shu); transition: width .45s ease;
+  .feature::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--shu);
   }
-  .svc:hover::after { width: 100%; }
-  .svc-no { font-family: var(--mono); font-size: 12px; color: var(--shu); letter-spacing: 0.2em; }
-  .svc h3 { font-family: var(--mincho); font-size: 21px; font-weight: 600; margin: 18px 0 16px; letter-spacing: 0.08em; }
-  .svc p { color: var(--ink-soft); font-size: 13.5px; }
-  .svc ul { margin-top: 18px; list-style: none; }
-  .svc li {
-    font-size: 12.5px; color: var(--ink-soft); padding: 7px 0 7px 16px;
-    border-bottom: 1px dashed var(--line); position: relative;
+  .feature-main { padding: 48px 46px; }
+  .feature-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--shu);
+    border: 1px solid var(--shu); padding: 6px 12px; margin-bottom: 24px;
   }
-  .svc li::before { content: "—"; position: absolute; left: 0; color: var(--shu); }
+  .feature-no { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); letter-spacing: 0.2em; }
+  .feature h3 { font-family: var(--mincho); font-size: clamp(26px, 3vw, 34px); font-weight: 700; margin: 10px 0 8px; letter-spacing: 0.05em; }
+  .feature .tagline { font-family: var(--mincho); font-size: 16px; color: var(--shu-deep); margin-bottom: 20px; letter-spacing: 0.04em; }
+  .feature p.desc { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 22px; }
+  .change {
+    background: var(--shu-wash); border-left: 3px solid var(--shu);
+    padding: 16px 20px; font-size: 14px; color: var(--ink);
+  }
+  .change b { color: var(--shu-deep); font-weight: 600; }
+  .feature-side {
+    padding: 48px 40px; border-left: 1px solid var(--line);
+    background: var(--paper-deep);
+    display: flex; flex-direction: column; justify-content: center; gap: 6px;
+  }
+  .price-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--ink-faint); }
+  .price-big { font-family: var(--mincho); font-weight: 700; line-height: 1.1; }
+  .price-big .yen { font-size: clamp(44px, 6vw, 64px); color: var(--ink); }
+  .price-big .man { font-size: 24px; margin-left: 2px; }
+  .price-note { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.08em; margin-bottom: 8px; }
+  .feature-side .tools { font-size: 12.5px; color: var(--ink-soft); margin: 4px 0 22px; }
+  .feature-side .btn-primary { width: 100%; justify-content: center; }
+
+  /* grid of other products */
+  .prod-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid var(--line); border-bottom: none; }
+  .prod {
+    padding: 38px 36px 40px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    background: var(--paper-card); transition: background .35s; position: relative;
+    display: flex; flex-direction: column;
+  }
+  .prod:nth-child(2n) { border-right: none; }
+  .prod::after { content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 0; background: var(--shu); transition: width .45s ease; }
+  .prod:hover { background: #fff; }
+  .prod:hover::after { width: 100%; }
+  .prod-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .prod-no { font-family: var(--mono); font-size: 12px; color: var(--shu); letter-spacing: 0.18em; }
+  .prod-price { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.12em; border: 1px solid var(--line); padding: 4px 10px; white-space: nowrap; }
+  .prod h3 { font-family: var(--mincho); font-size: 22px; font-weight: 600; margin: 16px 0 12px; letter-spacing: 0.06em; }
+  .prod p.desc { color: var(--ink-soft); font-size: 13.5px; margin-bottom: 16px; }
+  .prod .change { margin-top: auto; font-size: 13px; }
+  .prod .prod-link {
+    margin-top: 20px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+    color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    min-height: 44px;
+  }
+  .prod .prod-link:hover { color: var(--shu); }
+  .prod .prod-link .arrow { transition: transform .3s; }
+  .prod .prod-link:hover .arrow { transform: translateX(5px); }
 
   /* ---------- results (dark) ---------- */
   .results { background: var(--night); color: var(--night-text); }
   .results .sec-title { color: #fff; }
   .results .sec-en { color: #8b8fa0; }
+  .results .sec-lead { color: #b7bac4; }
   .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--night-line); }
-  .stat { padding: 46px 36px; border-right: 1px solid var(--night-line); }
+  .stat { padding: 48px 38px; border-right: 1px solid var(--night-line); }
   .stat:last-child { border-right: none; }
   .stat-num {
     font-family: var(--mono); font-weight: 600;
-    font-size: clamp(44px, 5.4vw, 64px); line-height: 1.1; color: #fff;
+    font-size: clamp(46px, 5.6vw, 66px); line-height: 1.1; color: #fff;
   }
   .stat-num .unit { font-size: 0.4em; color: var(--shu); margin-left: 6px; }
   .stat-label { margin-top: 14px; font-size: 13px; color: #9a9eab; }
   .case {
-    margin-top: 26px; border: 1px solid var(--night-line); padding: 42px 40px;
+    margin-top: 26px; border: 1px solid var(--night-line); padding: 44px 42px;
     display: grid; grid-template-columns: 180px 1fr; gap: 34px; align-items: start;
   }
   .case-tag {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em;
-    color: var(--shu); border: 1px solid var(--shu);
-    padding: 6px 12px; display: inline-block; white-space: nowrap;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+    color: var(--shu); border: 1px solid var(--shu); padding: 6px 12px;
+    display: inline-block; white-space: nowrap;
   }
-  .case h3 { font-family: var(--mincho); font-size: 22px; font-weight: 600; color: #fff; letter-spacing: 0.06em; margin-bottom: 14px; }
-  .case p { color: #b7bac4; font-size: 13.5px; }
+  .case h3 { font-family: var(--mincho); font-size: 23px; font-weight: 600; color: #fff; letter-spacing: 0.05em; margin-bottom: 14px; }
+  .case p { color: #b7bac4; font-size: 14px; }
 
   /* ---------- profile ---------- */
-  .profile-grid { max-width: 720px; }
+  .profile-grid { max-width: 760px; }
   .profile-name-en { font-family: var(--mono); font-size: 12px; color: var(--shu); letter-spacing: 0.26em; }
-  .profile-name { font-family: var(--mincho); font-size: 32px; font-weight: 600; margin: 10px 0 6px; letter-spacing: 0.12em; }
-  .profile-role { font-size: 13px; color: var(--ink-soft); margin-bottom: 28px; }
-  .profile-body p { color: var(--ink-soft); font-size: 14px; margin-bottom: 16px; max-width: 560px; }
+  .profile-name { font-family: var(--mincho); font-size: 34px; font-weight: 600; margin: 10px 0 6px; letter-spacing: 0.12em; }
+  .profile-role { font-size: 13px; color: var(--ink-soft); margin-bottom: 30px; }
+  .profile-body p { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 16px; max-width: 600px; }
 
   /* ---------- company ---------- */
   .company { background: var(--paper-deep); border-top: 1px solid var(--line); }
-  .co-table { width: 100%; border-collapse: collapse; max-width: 720px; }
+  .co-table { width: 100%; border-collapse: collapse; max-width: 760px; }
   .co-table th, .co-table td {
     text-align: left; padding: 20px 8px; border-bottom: 1px solid var(--line);
     font-weight: 400; font-size: 14px; vertical-align: top;
   }
-  .co-table th { width: 180px; color: var(--ink-soft); font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; }
+  .co-table th { width: 200px; color: var(--ink-soft); font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; }
+  .co-table a { color: var(--shu-deep); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .co-table a:hover { border-color: var(--shu); }
 
   /* ---------- contact ---------- */
-  .contact { text-align: center; padding: 130px 0; }
+  .contact { text-align: center; padding: 136px 0; border-top: 1px solid var(--line); }
   .contact .big {
-    font-family: var(--mincho); font-size: clamp(28px, 4.4vw, 46px);
-    font-weight: 600; letter-spacing: 0.1em; line-height: 1.7;
+    font-family: var(--mincho); font-size: clamp(28px, 4.6vw, 48px);
+    font-weight: 600; letter-spacing: 0.08em; line-height: 1.65;
   }
-  .contact p.lead { color: var(--ink-soft); margin: 26px auto 46px; max-width: 480px; font-size: 14px; }
+  .contact p.lead { color: var(--ink-soft); margin: 26px auto 20px; max-width: 520px; font-size: 14.5px; }
+  .contact .mail-plain {
+    display: inline-block; font-family: var(--mono); font-size: 15px; letter-spacing: 0.06em;
+    color: var(--ink); text-decoration: none; margin-bottom: 40px; border-bottom: 1px solid var(--line); padding-bottom: 3px;
+  }
+  .contact .mail-plain:hover { color: var(--shu); border-color: var(--shu); }
   .btn {
-    display: inline-block; text-decoration: none;
-    font-family: var(--mono); font-size: 14px; letter-spacing: 0.18em;
-    color: #fff; background: var(--ink); padding: 20px 64px;
+    display: inline-flex; align-items: center; gap: 12px; min-height: 44px;
+    text-decoration: none; font-family: var(--mono); font-size: 14px; letter-spacing: 0.16em;
+    color: #fff; background: var(--ink); padding: 20px 60px;
     position: relative; overflow: hidden; transition: color .3s;
   }
   .btn span { position: relative; z-index: 2; }
-  .btn::before {
-    content: ""; position: absolute; inset: 0; background: var(--shu);
-    transform: translateY(101%); transition: transform .35s ease;
-  }
+  .btn::before { content: ""; position: absolute; inset: 0; background: var(--shu); transform: translateY(101%); transition: transform .35s ease; }
   .btn:hover::before { transform: none; }
 
   footer {
-    border-top: 1px solid var(--line); padding: 34px 0;
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--mono); font-size: 11px; color: var(--ink-soft);
-    letter-spacing: 0.14em;
+    border-top: 1px solid var(--line); padding: 36px 0;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.14em;
   }
-  footer .wrap { display: flex; justify-content: space-between; width: 100%; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
 
   /* ---------- responsive ---------- */
+  @media (max-width: 920px) {
+    .feature { grid-template-columns: 1fr; }
+    .feature-side { border-left: none; border-top: 1px solid var(--line); }
+  }
   @media (max-width: 860px) {
-    nav a:not(.cta) { display: none; }
+    .nav-main { display: none; }
+    .burger { display: flex; }
     .hero-tate { display: none; }
-    .svc-grid, .stat-grid { grid-template-columns: 1fr; }
-    .svc, .stat { border-right: none; border-bottom: 1px solid var(--line); }
-    .results .stat { border-bottom: 1px solid var(--night-line); }
-    .svc:last-child, .stat:last-child { border-bottom: none; }
+    section { padding: 84px 0; }
+    .prod-grid { grid-template-columns: 1fr; }
+    .prod { border-right: none; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--night-line); }
+    .stat:last-child { border-bottom: none; }
     .case { grid-template-columns: 1fr; gap: 20px; }
-    section { padding: 80px 0; }
+  }
+  @media (max-width: 480px) {
+    .wrap, .header-in { padding-left: 20px; padding-right: 20px; }
+    .feature-main, .feature-side { padding: 32px 24px; }
+    .prod { padding: 30px 24px 34px; }
+    a.cta { padding: 11px 16px; letter-spacing: 0.1em; }
+    .btn { padding: 18px 40px; }
+  }
+
+  .nobr { white-space: nowrap; }
+  .sp-br { display: none; }
+  .biz-list { line-height: 1.85; }
+  @media (max-width: 480px) {
+    .sp-br { display: inline; }
+    .contact .big { font-size: 22px; letter-spacing: 0.04em; }
+    h3 { line-break: strict; }
+    .co-table, .co-table tbody, .co-table tr, .co-table th, .co-table td {
+      display: block; width: 100%;
+    }
+    .co-table th {
+      width: 100%; border-bottom: none; padding: 22px 0 2px;
+    }
+    .co-table tr:first-child th { padding-top: 8px; }
+    .co-table td { padding: 0 0 8px; }
   }
 </style>
 </head>
 <body>
+<a class="skip" href="#products">本文へスキップ</a>
 
 <header>
   <div class="header-in">
-    <a class="logo" href="#top">RIPT</a>
-    <nav>
-      <a href="#services">事業内容</a>
+    <a class="logo" href="#top" aria-label="RIPT ホームへ">RIPT</a>
+    <nav class="nav-main" aria-label="メインナビゲーション">
+      <a href="#products">商品</a>
       <a href="#results">実績</a>
       <a href="#profile">代表</a>
       <a href="#company">会社概要</a>
-      <!-- TODO: 送信先メールアドレスを差し替え -->
-      <a class="cta" href="mailto:contact@example.com">CONTACT</a>
     </nav>
+    <div class="header-right">
+      <a class="cta" href="mailto:info@ript.work?subject=RIPT%E3%81%B8%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">CONTACT</a>
+      <button class="burger" id="burger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="モバイルナビゲーション">
+  <a href="#products">商品<span class="en">PRODUCTS</span></a>
+  <a href="#results">実績<span class="en">TRACK RECORD</span></a>
+  <a href="#profile">代表<span class="en">REPRESENTATIVE</span></a>
+  <a href="#company">会社概要<span class="en">COMPANY</span></a>
+  <a href="#contact">お問い合わせ<span class="en">CONTACT</span></a>
+</nav>
 
 <!-- ================= HERO ================= -->
 <div class="hero" id="top">
   <div class="wrap hero-in">
-    <p class="hero-label reveal d1">RIPT Inc. — Management Advisory</p>
-    <h1 class="reveal d2">AI <span class="shu">×</span> 経営</h1>
-    <p class="hero-sub reveal d3">
+    <p class="hero-label reveal">RIPT Inc. — AI &times; Management</p>
+    <h1 class="reveal">AI <span class="shu">&times;</span> 経営</h1>
+    <div class="hero-lines reveal">
       現状を知る。ゴールを描く。ギャップを埋める。<br>
-      私たちが届けるのは、御社の業務に起きる「変化」です。<br>
+      私たちが届けるのは、御社の業務に起きる<b>「変化」</b>です。<br>
       AIも、システムも、そのための道具にすぎません。
+    </div>
+    <p class="hero-sub reveal">
+      まずは経理から。<b style="color:var(--shu-deep);font-weight:600;">経理自動化パック</b>で、経理を回す時間を、売上をつくる時間に戻す。<br>
+      数字は自分で握ったまま、本業の判断に時間を使えるようにします。
     </p>
+    <div class="hero-ctas reveal">
+      <a class="btn-primary" href="#products">
+        <span>経理自動化パックを見る</span>
+        <span class="price-chip">30万円</span>
+      </a>
+      <a class="mail-plain" href="mailto:info@ript.work?subject=RIPT%E3%81%B8%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">info@ript.work</a>
+    </div>
   </div>
-  <div class="hero-tate">現状から、理想へ。</div>
+  <div class="hero-tate" aria-hidden="true">現状から、理想へ。</div>
 </div>
 
-<!-- ================= SERVICES ================= -->
-<section class="services" id="services">
+<!-- ================= PRODUCTS ================= -->
+<section class="products" id="products">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="sec-no">01</span>
-      <h2 class="sec-title">事業内容</h2>
-      <span class="sec-en">SERVICES</span>
+      <h2 class="sec-title">商品ラインナップ</h2>
+      <span class="sec-en">PRODUCTS</span>
     </div>
-    <div class="svc-grid">
-      <div class="svc reveal d1">
-        <span class="svc-no">S-01</span>
-        <h3>経営アドバイザリー</h3>
-        <p>数字とITの両面から、経営の意思決定に伴走します。DX戦略の立案だけでなく、実行まで一気通貫で支援します。</p>
-        <ul>
-          <li>業務効率化・DX戦略の立案と実行</li>
-          <li>ITツール選定・導入の技術的判断</li>
-          <li>外部システム会社の提案評価</li>
-        </ul>
+    <p class="sec-lead reveal">経理の自動化から、社長業務のAI化、研修、開発、集客まで。入口は、経理自動化パックです。</p>
+
+    <!-- FEATURED -->
+    <div class="feature reveal">
+      <div class="feature-main">
+        <span class="feature-badge">入口商品</span>
+        <div class="feature-no">P-01</div>
+        <h3>経理自動化パック</h3>
+        <p class="tagline">freee・マネーフォワード対応。RIPTが自社の経理をこの方法で回しています。</p>
+        <p class="desc">
+          AIに話しかけるだけで、月次の損益や試算表が見られる。CSVから請求書を一括で作成。
+          記帳もAIで素早く。会計ソフトを開いて人間が行っていた作業を、ひとつの流れにまとめます。
+        </p>
+        <div class="change">
+          <b>何が変わるか：</b>経理を回す時間が、売上をつくる時間に戻る。数字は自分で握ったまま、本業の判断に時間が使えます。
+        </div>
       </div>
-      <div class="svc reveal d2">
-        <span class="svc-no">S-02</span>
+      <div class="feature-side">
+        <span class="price-label">PRICE</span>
+        <div class="price-big"><span class="yen">30</span><span class="man">万円</span></div>
+        <div class="price-note">1回払い</div>
+        <div class="tools">対応：freee ／ マネーフォワード</div>
+        <a class="btn-primary" href="mailto:info@ript.work?subject=%E7%B5%8C%E7%90%86%E8%87%AA%E5%8B%95%E5%8C%96%E3%83%91%E3%83%83%E3%82%AF%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">
+          <span>この商品を相談する →</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- OTHERS -->
+    <div class="prod-grid">
+      <div class="prod reveal">
+        <div class="prod-top">
+          <span class="prod-no">P-02</span>
+          <span class="prod-price">要相談</span>
+        </div>
+        <h3>AI分身の術</h3>
+        <p class="desc">社長の判断基準や仕事をAIに移して、社長が分身できる状態をつくる。社長業務そのものをAI化します。</p>
+        <div class="change"><b>何が変わるか：</b>社長がいない時間でも、判断と仕事が止まらない。</div>
+        <a class="prod-link" href="mailto:info@ript.work?subject=AI%E5%88%86%E8%BA%AB%E3%81%AE%E8%A1%93%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">相談する <span class="arrow">→</span></a>
+      </div>
+      <div class="prod reveal">
+        <div class="prod-top">
+          <span class="prod-no">P-03</span>
+          <span class="prod-price">要相談</span>
+        </div>
         <h3>法人向けAI・経理研修</h3>
-        <p>ChatGPT・Claudeなどの生成AIを、現場の定型業務で使いこなすための実践研修。経理・バックオフィス業務に特化したカリキュラムを提供します。</p>
-        <ul>
-          <li>生成AI活用の社内研修・講座設計</li>
-          <li>経理・事務業務のAI活用実習</li>
-          <li>導入後の定着伴走支援</li>
-        </ul>
+        <p class="desc">ChatGPT・Claudeなどの生成AIを、現場の定型業務で使いこなす実践研修。経理・バックオフィスに特化し、導入後の定着まで伴走します。</p>
+        <div class="change"><b>何が変わるか：</b>現場が「知っている」だけでなく、日常業務で使えるようになる。</div>
+        <a class="prod-link" href="mailto:info@ript.work?subject=%E6%B3%95%E4%BA%BA%E5%90%91%E3%81%91AI%E3%83%BB%E7%B5%8C%E7%90%86%E7%A0%94%E4%BF%AE%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">相談する <span class="arrow">→</span></a>
       </div>
-      <div class="svc reveal d3">
-        <span class="svc-no">S-03</span>
-        <h3>業務システム・AI開発</h3>
-        <p>毎日の手作業を、ボタンひとつに。AIを活用した高速開発で、業務に合わせたシステムを小さく速く作り、育てます。</p>
-        <ul>
-          <li>定型業務の自動化システム開発</li>
-          <li>データ変換・帳票作成の自動化</li>
-          <li>保守運用・継続的な機能改善</li>
-        </ul>
+      <div class="prod reveal">
+        <div class="prod-top">
+          <span class="prod-no">P-04</span>
+          <span class="prod-price">要相談</span>
+        </div>
+        <h3>業務システム・AI開発<span class="nobr">と保守</span></h3>
+        <p class="desc">毎日の手作業をボタンひとつに。業務に合わせたシステムを小さく速く作り、保守運用と機能追加を続けます。</p>
+        <div class="change"><b>何が変わるか：</b>転記や突合の手間とミスがなくなり、業務が回り続ける。</div>
+        <a class="prod-link" href="mailto:info@ript.work?subject=%E6%A5%AD%E5%8B%99%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%83%BBAI%E9%96%8B%E7%99%BA%E3%81%A8%E4%BF%9D%E5%AE%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">相談する <span class="arrow">→</span></a>
+      </div>
+      <div class="prod reveal">
+        <div class="prod-top">
+          <span class="prod-no">P-05</span>
+          <span class="prod-price">要相談</span>
+        </div>
+        <h3>月額のAI参謀<span class="nobr">（営業・集客）</span></h3>
+        <p class="desc">経理自動化の先の継続契約。営業と集客をAIで回す、月額の参謀。経理が整った次の一手を預かります。</p>
+        <div class="change"><b>何が変わるか：</b>経理が回った先で、新規のお客様を獲る動きが止まらない。</div>
+        <a class="prod-link" href="mailto:info@ript.work?subject=%E6%9C%88%E9%A1%8D%E3%81%AEAI%E5%8F%82%E8%AC%80%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">相談する <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -317,23 +526,23 @@
       <span class="sec-en">TRACK RECORD</span>
     </div>
     <div class="stat-grid">
-      <div class="stat reveal d1">
-        <div class="stat-num" data-count="40">0<span class="unit">種+</span></div>
+      <div class="stat reveal">
+        <div class="stat-num" data-count="40"><span class="num">40</span><span class="unit">種+</span></div>
         <div class="stat-label">自動化した定型業務の処理数</div>
       </div>
-      <div class="stat reveal d2">
-        <div class="stat-num" data-count="14">0<span class="unit">件</span></div>
+      <div class="stat reveal">
+        <div class="stat-num" data-count="14"><span class="num">14</span><span class="unit">件</span></div>
         <div class="stat-label">直近2か月で納品した新機能</div>
       </div>
-      <div class="stat reveal d3">
-        <div class="stat-num" data-count="100">0<span class="unit">%</span></div>
+      <div class="stat reveal">
+        <div class="stat-num" data-count="100"><span class="num">100</span><span class="unit">%</span></div>
         <div class="stat-label">代表による直接担当率</div>
       </div>
     </div>
     <div class="case reveal">
       <span class="case-tag">CASE STUDY</span>
       <div>
-        <h3>法律事務所の債権回収業務を、まるごと自動化</h3>
+        <h3>法律事務所の債権回収業務を、<br class="sp-br">まるごと自動化。</h3>
         <p>
           複数システムに散らばるデータの突合・変換・リスト作成を、Webアプリケーションとして一元化。
           担当者が手作業で行っていたリスト作成業務をボタンひとつに置き換え、
@@ -353,7 +562,7 @@
       <span class="sec-en">REPRESENTATIVE</span>
     </div>
     <div class="profile-grid">
-      <div class="reveal d1">
+      <div class="reveal">
         <p class="profile-name-en">TAKUYA TSUCHIYA</p>
         <h3 class="profile-name">土屋 拓也</h3>
         <p class="profile-role">株式会社RIPT 代表取締役</p>
@@ -384,8 +593,9 @@
       <tr><th>社名</th><td>株式会社RIPT</td></tr>
       <tr><th>代表者</th><td>代表取締役　土屋 拓也</td></tr>
       <tr><th>所在地</th><td>〒105-0013<br>東京都港区浜松町2丁目2番15号 浜松町ダイヤビル2階</td></tr>
-      <tr><th>事業内容</th><td>経営アドバイザリー／法人向けAI・経理研修／業務システム・AI開発</td></tr>
+      <tr><th>事業内容</th><td class="biz-list">経理自動化パック（freee・マネーフォワード対応）<br>AI分身の術（社長業務のAI化）<br>法人向けAI・経理研修<br>業務システム・AI開発と保守<br>月額のAI参謀（営業・集客）</td></tr>
       <tr><th>適格請求書発行事業者<br>登録番号</th><td>T1010701034732</td></tr>
+      <tr><th>連絡先</th><td><a href="mailto:info@ript.work?subject=RIPT%E3%81%B8%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">info@ript.work</a></td></tr>
     </table>
   </div>
 </section>
@@ -393,13 +603,14 @@
 <!-- ================= CONTACT ================= -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <p class="big reveal d1">まずは、業務の困りごとを<br>そのまま聞かせてください。</p>
-    <p class="lead reveal d2">
-      「何をAI化できるのか分からない」段階からのご相談を歓迎します。
+    <p class="big reveal">まずは、<br>業務の困りごとを、<br>そのまま聞かせてください。</p>
+    <p class="lead reveal">
+      「何から自動化できるか分からない」<br>段階からのご相談を歓迎します。<br>
       ご相談・お見積りは無料です。
     </p>
-    <!-- TODO: 送信先メールアドレスを差し替え -->
-    <a class="btn reveal d3" href="mailto:contact@example.com"><span>CONTACT →</span></a>
+    <a class="mail-plain reveal" href="mailto:info@ript.work?subject=RIPT%E3%81%B8%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">info@ript.work</a>
+    <br>
+    <a class="btn reveal" href="mailto:info@ript.work?subject=RIPT%E3%81%B8%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B"><span>CONTACT →</span></a>
   </div>
 </section>
 
@@ -411,29 +622,62 @@
 </footer>
 
 <script>
-  document.body.classList.add("js");
-  // スクロール表示
-  const io = new IntersectionObserver((es) => {
-    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } });
-  }, { threshold: 0.18 });
-  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  (function () {
+    var root = document.documentElement;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // 数字カウントアップ
-  const cio = new IntersectionObserver((es) => {
-    es.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target, goal = +el.dataset.count, unit = el.querySelector(".unit");
-      const t0 = performance.now(), dur = 1200;
-      (function tick(t) {
-        const p = Math.min((t - t0) / dur, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.childNodes[0].textContent = Math.round(goal * eased);
-        if (p < 1) requestAnimationFrame(tick);
-      })(t0);
-      cio.unobserve(el);
+    // mobile nav toggle (works without Motion)
+    var burger = document.getElementById("burger");
+    var mnav = document.getElementById("mobileNav");
+    function closeNav() { mnav.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); burger.setAttribute("aria-label", "メニューを開く"); }
+    burger.addEventListener("click", function () {
+      var open = mnav.classList.toggle("open");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      burger.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
     });
-  }, { threshold: 0.6 });
-  document.querySelectorAll(".stat-num").forEach(el => cio.observe(el));
+    mnav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeNav); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNav(); });
+
+    if (reduce) return; // honor reduced motion: leave content in its readable final state
+
+    import("https://cdn.jsdelivr.net/npm/motion@12.23.24/+esm")
+      .then(function (m) {
+        var animate = m.animate, inView = m.inView;
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          var rect = el.getBoundingClientRect();
+          var visible = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+          if (visible) return; // already on screen: keep readable, no hide-then-fade
+          el.style.opacity = "0";
+          el.style.transform = "translateY(26px)";
+          inView(el, function () {
+            animate(el, { opacity: [0, 1], transform: ["translateY(26px)", "translateY(0px)"] },
+                    { duration: 0.8, easing: [0.22, 1, 0.36, 1] });
+            return function () {}; // run once
+          }, { amount: 0.18 });
+        });
+
+        // count-up: numbers already correct in HTML; briefly animate up then restore
+        document.querySelectorAll(".stat-num").forEach(function (el) {
+          var goal = +el.dataset.count;
+          var out = el.querySelector(".num");
+          inView(el, function () {
+            animate(0, goal, {
+              duration: 1.2,
+              easing: [0.22, 1, 0.36, 1],
+              onUpdate: function (v) { out.textContent = Math.round(v); },
+              onComplete: function () { out.textContent = goal; }
+            });
+            return function () {};
+          }, { amount: 0.6 });
+        });
+      })
+      .catch(function () {
+        // Motion failed to load: reveal everything so nothing stays hidden
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          el.style.opacity = "1"; el.style.transform = "none";
+        });
+      });
+  })();
 </script>
 </body>
 </html>
